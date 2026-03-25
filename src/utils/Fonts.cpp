@@ -1,25 +1,40 @@
-#include "../../include/Fonts.hpp"
+#include "Fonts.hpp"
 
-HFONT WidgetFonts::Urbanist(int size, int weight = FW_NORMAL){
-    return CreateFontA(size, 0, 0, 0, weight,
-                       FALSE, FALSE, FALSE,
-                       ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                       CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                       DEFAULT_PITCH | FF_SWISS, "Urbanist");
+HFONT WidgetFonts::Urbanist(int height, int weight = FW_NORMAL){
+    return CreateFontW(
+            height, 0, 0, 0, weight,
+            FALSE, FALSE, FALSE,
+            DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,
+            CLIP_DEFAULT_PRECIS,
+            CLEARTYPE_QUALITY,
+            VARIABLE_PITCH | FF_SWISS,
+            L"Urbanist"
+        );
 }
 
-HFONT WidgetFonts::Doto(int size, int weight = FW_NORMAL){
-    return CreateFontA(size, 0, 0, 0, weight,
-                       FALSE, FALSE, FALSE,
-                       ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                       CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                       DEFAULT_PITCH | FF_SWISS, "Doto");
+HFONT WidgetFonts::Doto(int height, int weight = FW_NORMAL){
+    return CreateFontW(
+            height, 0, 0, 0, weight,
+            FALSE, FALSE, FALSE,
+            DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,
+            CLIP_DEFAULT_PRECIS,
+            CLEARTYPE_QUALITY,
+            VARIABLE_PITCH | FF_SWISS,
+            L"Doto"
+        );
 }
 
-HFONT WidgetFonts::KodeMono(int size, int weight = FW_NORMAL){
-    return CreateFontA(size, 0, 0, 0, weight,
-                       FALSE, FALSE, FALSE,
-                       ANSI_CHARSET, OUT_DEFAULT_PRECIS,
-                       CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-                       DEFAULT_PITCH | FF_SWISS, "KodeMono");
+HFONT WidgetFonts::KodeMono(int height, int weight = FW_NORMAL){
+    return CreateFontW(
+            height, 0, 0, 0, weight,
+            FALSE, FALSE, FALSE,
+            DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,
+            CLIP_DEFAULT_PRECIS,
+            CLEARTYPE_QUALITY,
+            VARIABLE_PITCH | FF_SWISS,
+            L"Kode Mono"
+        );
 }
