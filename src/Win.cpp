@@ -1,6 +1,7 @@
 #include "ClockWidget.hpp"
 #include <minwindef.h>
 #include <windef.h>
+#include <wingdi.h>
 #include <winuser.h>
 
 // The main entry point for Win32 apps: WinMain
@@ -19,12 +20,12 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
     WNDCLASSW widgetTemplate = { };
 
     // We define what kind of window our window will be here
-    widgetTemplate.lpfnWndProc = WidgetHandler;                                 //
-    widgetTemplate.hInstance = instance;                                        //
-    widgetTemplate.lpszClassName = CLASS_NAME;                                  //
-    widgetTemplate.style = CS_HREDRAW | CS_VREDRAW;                             //
-    widgetTemplate.hCursor = LoadCursor(NULL, IDC_ARROW);                       //
-    widgetTemplate.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(20,20,20));     //
+    widgetTemplate.lpfnWndProc = WidgetHandler;                                 // Refer our Message Handler
+    widgetTemplate.hInstance = instance;                                        // Refer the Executable
+    widgetTemplate.lpszClassName = CLASS_NAME;
+    widgetTemplate.style = CS_HREDRAW | CS_VREDRAW;                             // Redraw in X and Y enabled
+    widgetTemplate.hCursor = LoadCursor(NULL, IDC_ARROW);                       // Load the default cursor on hover
+    widgetTemplate.hbrBackground = CreateSolidBrush(RGB(20,20,20));             // Assign Background color
 
     // Now we register our template and now we can reference it by CLASS_NAME?
     RegisterClassW(&widgetTemplate);
@@ -74,6 +75,16 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
         // detected and created to our event handler we created
         DispatchMessageW(&eventMsg);
     }
+
+    // We need to delete the "Brush" we created, or else memory leak
+    // This is allocated on heap apparently.
+    // And WinMain will just delete the struct WidgetTemplate
+    // on return, but won't delete the allocated heap things.
+    // Classic, but inconvinient. And I am not creating a
+    // an extra var for this.
+    DeleteObject(widgetTemplate.hbrBackground);     // Direct access and yeet
+    // Executed only when the loop ends which signals
+    // the end of the program.
 
     // I have given up on documenting this cleanly,
     // I am mad.
