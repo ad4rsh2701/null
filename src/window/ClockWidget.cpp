@@ -34,8 +34,8 @@ LRESULT CALLBACK WidgetHandler(HWND window, UINT event, WPARAM wparam, LPARAM lp
             state = new WidgetState();
 
             // Creating Fonts for the DayFont and TimeFont using WidgetFonts namespace
-            state -> DayFont = WidgetFonts::Doto(32, FW_BOLD);
-            state -> TimeFont = WidgetFonts::Urbanist(16, FW_NORMAL);
+            state -> DayFont = WidgetFonts::Doto(DAY_FONT_SIZE, FW_BOLD);
+            state -> TimeFont = WidgetFonts::Urbanist(TIME_FONT_SIZE, FW_NORMAL);
 
             // Update the User Data field to a "pointer to WidgetState instance".
             SetWindowLongPtr(window, GWLP_USERDATA, (LONG_PTR)state);
@@ -146,13 +146,13 @@ LRESULT CALLBACK WidgetHandler(HWND window, UINT event, WPARAM wparam, LPARAM lp
             // original state of the font. So, we save that to `defaultFont`.
             // This is possible as, while replacing the font, `SelectObject` returns the previously
             // stored font value, which is the default font value.
-            HFONT defaultFont = (HFONT)SelectObject(canvas, state->DayFont);    // Loading the font for Day
-            SetBkMode(canvas, TRANSPARENT);                                     // Background Color
-            TextOutW(canvas, 40, 5, day, (int)wcslen(day));                     // The Day text with postion coordinates
-            SelectObject(canvas, state->TimeFont);                              // Loading the Font for Time
-            TextOutW(canvas, 40, 40, timeStr, (int)wcslen(timeStr));            // The Time text with position coordinates
-            SelectObject(canvas, defaultFont);                                  // Restoring the original font
-            EndPaint(window, &ps);                                              // Ending the instance.. I guess?
+            HFONT defaultFont = (HFONT)SelectObject(canvas, state->DayFont);                        // Loading the font for Day
+            SetBkMode(canvas, TRANSPARENT);                                                         // Background Color
+            TextOutW(canvas, X_DAY_TEXT_POS, Y_DAY_TEXT_POS, day, (int)wcslen(day));                // The Day text with postion coordinates
+            SelectObject(canvas, state->TimeFont);                                                  // Loading the Font for Time
+            TextOutW(canvas, X_TIME_TEXT_POS, Y_TIME_TEXT_POS, timeStr, (int)wcslen(timeStr));      // The Time text with position coordinates
+            SelectObject(canvas, defaultFont);                                                      // Restoring the original font
+            EndPaint(window, &ps);                                                                  // Ending the instance.. I guess?
 
             break;
         }

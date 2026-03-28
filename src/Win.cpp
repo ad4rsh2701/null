@@ -35,8 +35,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
         WS_EX_TOOLWINDOW,           // Hide executable from taskbar
         CLASS_NAME, L"NullWidget",  // Use "this" template
         WS_POPUP | WS_VISIBLE,      // Borderless window to be shown after creation (same bit packing logic.. ig?)
-        100, 100,                   // Initial X,Y coords
-        250, 80,                    // Width and Height of the window in px
+        X_SPAWN, Y_SPAWN,           // Initial X,Y coords
+        WIDGET_LENGTH,WIDGET_WIDTH, // Width and Height of the window in px
         NULL, NULL, instance, NULL  // NO.
     );
     // WS_EX_TOOLWINDOW  — hides it from the taskbar
