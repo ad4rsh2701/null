@@ -1,4 +1,5 @@
 #include "ClockWidget.hpp"
+#include "ContextMenu.hpp"
 #include <minwindef.h>
 #include <windef.h>
 #include <wingdi.h>
@@ -44,6 +45,16 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
     // 100, 100          — initial x, y position on screen
     // 250, 80           — width, height in pixels
 
+    // Now, for the Context Menu
+    WNDCLASSW menuTemplate = { };
+    menuTemplate.lpfnWndProc = ContextMenuHandler;
+    menuTemplate.hInstance = instance;
+    menuTemplate.lpszClassName = MENU_CLASS_NAME;
+    menuTemplate.hCursor = LoadCursor(NULL, IDC_ARROW);
+    menuTemplate.hbrBackground = CreateSolidBrush(RGB(15, 15, 15));
+    RegisterClassW(&menuTemplate);
+    // We will handle Menu Window creation in ClockWidget.cpp
+
     // MSG holds one event from the Windows event queue, they said.
     // I think it's a "holder" for those events Windows works on,
     // you know.. those MACROS WHICH EXPANDS TO HEX.
@@ -83,6 +94,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
     // Classic, but inconvinient. And I am not creating a
     // an extra var for this.
     DeleteObject(widgetTemplate.hbrBackground);     // Direct access and yeet
+    DeleteObject(menuTemplate.hbrBackground);
     // Executed only when the loop ends which signals
     // the end of the program.
 
