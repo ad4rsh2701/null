@@ -11,7 +11,7 @@ include_directories(include)
 
 set(SOURCES
     src/Win.cpp
-    src/ClockWidget.cpp
+    src/window/ClockWidget.cpp
     src/utils/fonts.cpp
     src/window/ContextMenu.cpp
 )
