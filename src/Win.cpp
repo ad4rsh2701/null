@@ -19,7 +19,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int){
     // We define what kind of window our window will be here
     widgetTemplate.lpfnWndProc = WidgetHandler;                                 // Refer our Message Handler
     widgetTemplate.hInstance = instance;                                        // Refer the Executable
-    widgetTemplate.lpszClassName = CLASS_NAME;
+    widgetTemplate.lpszClassName = WIDGET_CLASS_NAME;
     widgetTemplate.style = CS_HREDRAW | CS_VREDRAW;                             // Redraw in X and Y enabled
     widgetTemplate.hCursor = LoadCursor(NULL, IDC_ARROW);                       // Load the default cursor on hover
     widgetTemplate.hbrBackground = CreateSolidBrush(RGB(20,20,20));             // Assign Background color
